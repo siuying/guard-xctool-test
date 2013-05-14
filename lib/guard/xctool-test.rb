@@ -35,7 +35,7 @@ module Guard
         throw :task_has_failed
       end
 
-      unless test_target
+      unless target
         UI.info "Test :target missing"
         throw :task_has_failed
       end
