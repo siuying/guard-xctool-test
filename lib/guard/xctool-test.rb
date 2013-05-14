@@ -1,9 +1,9 @@
 require_relative './xctool_helper'
 require 'guard/guard'
-
+require 'guard'
 module Guard
   class XctoolTest < ::Guard::Guard
-    extend XctoolHelper
+    include XctoolHelper
 
     attr_reader :xctool, :test_paths, :target
 
@@ -66,17 +66,24 @@ module Guard
     #
     def run_all
       UI.info "Running all tests..."
-      system("#{xctool} test")
+      xctool_command("test")
     end
 
-    def run_tests_on_files(paths)
+    def run_on_changes(paths)
       test_files = test_classes_with_paths(paths, test_paths)
-      filenames = test_files.join(",")
 
-      UI.info "Running tests (#{filenames})"
-      system("xctool test -only #{target}:#{filenames}")
+      if test_files.size > 0
+        filenames = test_files.join(",")
+
+        UI.info "Running tests on classes: #{filenames}"
+        xctool_command("test -only #{target}:#{filenames}")
+      else
+        run_all
+      end
     end
 
-    alias_method :run_on_changes, :run_tests_on_files
+    def xctool_command(command)
+      system("#{xctool} #{command}")
+    end
   end
 end
