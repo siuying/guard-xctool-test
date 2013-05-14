@@ -1,3 +1,5 @@
+require 'xcodeproj'
+
 module Guard
   module XctoolHelper
     TEST_FILE_REGEXP = /(Test|Spec)\.(m|mm)$/
