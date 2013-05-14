@@ -30,8 +30,8 @@ describe "Guard::XctoolHelper" do
   end
 
   describe "::test_file" do 
-    it "should return test file if one exists" do
-      Dir.stub(:glob).and_return(["ProjectTests/A/MyFileSpec.m"])
+    it "should use glob to find the target file" do
+      Dir.should_receive(:glob).with("ProjectTests/**/MyFile*.*").and_return(["ProjectTests/A/MyFileSpec.m"])
       test_file = subject.test_file("Project/A/MyFile.m", "ProjectTests")
       test_file.should == "ProjectTests/A/MyFileSpec.m"
     end

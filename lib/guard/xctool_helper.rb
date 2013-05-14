@@ -27,22 +27,16 @@ module Guard
     # return nil if the test do not exists.
     #
     def test_file(file, test_paths=[])
-      puts "find test file #{file} from #{test_paths}"
-
       test_paths = [] unless test_paths
       test_paths = [test_paths] unless test_paths.is_a?(Array)
       class_name = classname_with_file(file)
 
       # for each test path, check if we can find corresponding test file
       test_paths.each do |path|
-        files = Dir.glob("#{path}/**/#{class_name}(Spec|Test).(m|mm)")
+        files = Dir.glob("#{path}/**/#{class_name}*.*").select {|file| file =~ TEST_FILE_REGEXP }
         first_file = files.first
-        puts " check: #{path}/**/#{class_name}(Spec|Test).(m|mm)"
-
         return first_file if first_file
       end
-
-      puts " -> not found"
       return nil
     end
 
