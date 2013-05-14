@@ -1,6 +1,6 @@
 # guard-xctool-test
 
-Xctool test guard allows you to automically & intelligently aunch specs when files are modified.
+guard-xctool-test allows you to automically & intelligently launch specs when files are modified.
 
 ## Installation
 
