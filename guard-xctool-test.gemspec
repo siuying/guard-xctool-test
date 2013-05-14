@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'guard/xctool/test/version'
+require 'guard/xctool-test/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "guard-xctool-test"
-  spec.version       = Guard::Xctool::TEST_VERSION
+  spec.version       = Guard::XctoolTestVersion::VERSION
   spec.authors       = ["Francis Chong"]
   spec.email         = ["francis@ignition.hk"]
   spec.description   = %q{TODO: Write a gem description}
