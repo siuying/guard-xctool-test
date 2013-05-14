@@ -33,7 +33,7 @@ module Guard
 
       # for each test path, check if we can find corresponding test file
       test_paths.each do |path|
-        files = Dir.glob("#{path}/**/#{class_name}*.*").select {|file| file =~ TEST_FILE_REGEXP }
+        files = Dir.glob("#{path}/**/#{class_name}*.*").select {|file| file =~ /#{class_name}(Test|Spec)\.(m|mm)$/ }
         first_file = files.first
         return first_file if first_file
       end
@@ -43,7 +43,7 @@ module Guard
     protected
     # Given a path of m or mm file, and return the class name
     def classname_with_file(path)
-      path.split("/").last.gsub(/(\.(m|mm))$/, "")
+      path.split("/").last.gsub(/(\.(.+))$/, "")
     end
   end
 end

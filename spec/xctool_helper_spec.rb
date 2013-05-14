@@ -36,6 +36,12 @@ describe "Guard::XctoolHelper" do
       test_file.should == "ProjectTests/A/MyFileSpec.m"
     end
 
+    it "should find correct test file if glob return two files having same prefix" do
+      Dir.stub(:glob).and_return(["ProjectTests/A/MyFile2Spec.m", "ProjectTests/A/MyFileSpec.m"])
+      test_file = subject.test_file("Project2/A/MyFile.m", ["ProjectTests"])
+      test_file.should == "ProjectTests/A/MyFileSpec.m"
+    end
+
     it "should accept array of paths" do
       Dir.stub(:glob).and_return([], ["ProjectTests2/A/MyFileSpec.m"])
       test_file = subject.test_file("Project2/A/MyFile.m", ["ProjectTests", "ProjectTests2"])
