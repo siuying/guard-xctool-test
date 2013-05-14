@@ -19,7 +19,7 @@ module Guard
       super
 
       @test_paths = options[:test_paths]  || "."
-      @target = options[:test_target]     || find_test_target
+      @test_target = options[:test_target]     || find_test_target
       @xctool = options[:xctool_command]  || "xctool"
     end
 
@@ -35,27 +35,10 @@ module Guard
         throw :task_has_failed
       end
 
-      unless target
+      unless test_target
         UI.info "Cannot find test target, please specify :test_target option"
         throw :task_has_failed
       end
-    end
-
-    # Called when `stop|quit|exit|s|q|e + enter` is pressed (when Guard quits).
-    #
-    # @raise [:task_has_failed] when stop has failed
-    # @return [Object] the task result
-    #
-    def stop
-    end
-
-    # Called when `reload|r|z + enter` is pressed.
-    # This method should be mainly used for "reload" (really!) actions like reloading passenger/spork/bundler/...
-    #
-    # @raise [:task_has_failed] when reload has failed
-    # @return [Object] the task result
-    #
-    def reload
     end
 
     # Called when just `enter` is pressed
@@ -66,7 +49,7 @@ module Guard
     #
     def run_all
       UI.info "Running all tests..."
-      xctool_command("test")
+      xctool_command("test -only #{test_target}")
     end
 
     def run_on_changes(paths)
@@ -76,7 +59,7 @@ module Guard
         filenames = test_files.join(",")
 
         UI.info "Running tests on classes: #{filenames}"
-        xctool_command("test -only #{target}:#{filenames}")
+        xctool_command("test -only #{test_target}:#{filenames}")
       else
         run_all
       end
