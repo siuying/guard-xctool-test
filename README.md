@@ -25,20 +25,59 @@ Or install it yourself as:
 ## Guardfile
 
 ```ruby
-guard 'xctool-test', :test_target => 'YouAppTests', :test_paths => 'YouAppTests' do
-  watch(%r{YouApp/(.+)\.(m|mm)$})
-  watch(%r{YouAppTests/(.+)\.(m|mm)$})
+guard 'xctool-test' do
+  watch(%r{YourApp/(.+)\.(m|mm)$})
+  watch(%r{YourAppTests/(.+)\.(m|mm)$})
 end
 ```
 
 ## Options
 
+By default, xctool-test find the folder for projects and find a target that look like test.
+You can supply your target by using ```test_target``` option.
+
 ```ruby
-guard 'xctool-test', :test_target => 'YouAppTests' do
-  watch(%r{YouApp/(.+)\.(m|mm)$})
-  watch(%r{YouAppTests/(.+)\.(m|mm)$})
+guard 'xctool-test', :test_target => 'YourAppTests' do
+  watch(%r{YourApp/(.+)\.(m|mm)$})
+  watch(%r{YourAppTests/(.+)\.(m|mm)$})
 end
 ```
+
+By default, xctool-test check all files under current folder for tests. You can specify a
+specific folder, or array of folders, as test path.
+
+```ruby
+guard 'xctool-test', :test_paths => 'YourAppTests' do
+  watch(%r{YourApp/(.+)\.(m|mm)$})
+  watch(%r{YourAppTests/(.+)\.(m|mm)$})
+end
+```
+
+```ruby
+guard 'xctool-test', :test_paths => ['YourAppUITests', 'YourAppTests'] do
+  watch(%r{YourApp/(.+)\.(m|mm)$})
+  watch(%r{YourAppTests/(.+)\.(m|mm)$})
+end
+```
+
+You can pass any of the standard xctool CLI options using the ```:cli``` option:
+
+```ruby
+guard 'xctool-test', :cli => '-workspace A.workspace' do
+  watch(%r{YourApp/(.+)\.(m|mm)$})
+  watch(%r{YourAppTests/(.+)\.(m|mm)$})
+end
+```
+
+You might specify the full path to the xctool with ```:xctool```  option:
+
+```ruby
+guard 'xctool-test', :xctool => '/usr/local/bin/xctool' do
+  watch(%r{YourApp/(.+)\.(m|mm)$})
+  watch(%r{YourAppTests/(.+)\.(m|mm)$})
+end
+```
+
 
 ## Contributing
 
