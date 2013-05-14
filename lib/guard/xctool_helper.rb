@@ -37,7 +37,7 @@ module Guard
       test_paths.each do |path|
         files = Dir.glob("#{path}/**/#{class_name}(Spec|Test).(m|mm)")
         first_file = files.first
-        puts " -> found #{first_file}"
+        puts " check: #{path}/**/#{class_name}(Spec|Test).(m|mm)"
 
         return first_file if first_file
       end
