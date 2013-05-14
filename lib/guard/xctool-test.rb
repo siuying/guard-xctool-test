@@ -18,9 +18,9 @@ module Guard
     def initialize(watchers = [], options = {})
       super
 
-      @test_paths = options[:test_paths]  || "."
-      @test_target = options[:test_target]     || find_test_target
-      @xctool = options[:xctool_command]  || "xctool"
+      @test_paths = options[:test_paths]    || "."
+      @test_target = options[:test_target]  || find_test_target
+      @xctool = options[:xctool_command]    || "xctool"
     end
 
     # Called once when Guard starts. Please override initialize method to init stuff.

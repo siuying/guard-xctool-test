@@ -42,7 +42,7 @@ module Guard
 
     # Find first project and first Test target from current folder
     def find_test_target
-      project_name = Dir["*.xcproject"].first
+      project_name = Dir["*.xcodeproj"].first
       if project_name
         project = Xcodeproj::Project.new(project_name)
 
