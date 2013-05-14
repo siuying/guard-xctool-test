@@ -11,7 +11,7 @@ module Guard
 
       extend TestHelper
 
-      attr_reader :xctool, :test_path, :test_target
+      attr_reader :xctool, :test_paths, :target
 
       # Initializes a Guard plugin.
       # Don't do any work here, especially as Guard plugins get initialized even if they are not in an active group!
@@ -24,8 +24,8 @@ module Guard
       def initialize(watchers = [], options = {})
         super
 
-        @test_path = options[:path] || "."
-        @test_target = options[:target]
+        @test_paths = options[:test_paths] || "."
+        @target = options[:target]
         @xctool = options[:xctool_command] || "xctool"
       end
 
@@ -76,15 +76,14 @@ module Guard
       end
 
       def run_tests_on_files(paths)
-        UI.info "Running tests for changed files"
-        test_files = test_classes_with_paths(paths)
+        test_files = test_classes_with_paths(paths, test_paths)
         filenames = test_files.join(",")
-        system("xctool test -only #{test_target}:#{filenames}")
+
+        UI.info "Running tests (#{filenames})"
+        system("xctool test -only #{target}:#{filenames}")
       end
 
       alias_method :run_on_changes, :run_tests_on_files
-      alias_method :run_on_additions, :run_tests_on_files
-      alias_method :run_on_modifications, :run_tests_on_files
     end
   end
 end

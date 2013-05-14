@@ -33,13 +33,19 @@ describe "Guard::Xctool::TestHelper" do
     it "should return test file if one exists" do
       Dir.stub(:glob).and_return(["ProjectTests/A/MyFileSpec.m"])
       test_file = subject.test_file("Project/A/MyFile.m", "ProjectTests")
-      test_file.should == "MyFileSpec"
+      test_file.should == "ProjectTests/A/MyFileSpec.m"
+    end
+
+    it "should accept array of paths" do
+      Dir.stub(:glob).and_return([], ["ProjectTests2/A/MyFileSpec.m"])
+      test_file = subject.test_file("Project2/A/MyFile.m", ["ProjectTests", "ProjectTests2"])
+      test_file.should == "ProjectTests2/A/MyFileSpec.m"
     end
 
     it "should return nil if one does not exists" do
       Dir.stub(:glob).and_return([])
       test_file = subject.test_file("Project/A/MyFile.m", "ProjectTests")
-      test_file.should_not == "MyFileSpec"
+      test_file.should be_nil
     end
   end
 end
