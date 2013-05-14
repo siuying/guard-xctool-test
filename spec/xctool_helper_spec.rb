@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "Guard::Xctool::TestHelper" do
+describe "Guard::XctoolHelper" do
   subject {
     object = Object.new
-    object.send :extend, Guard::Xctool::TestHelper
+    object.send :extend, Guard::XctoolHelper
   }
   describe "::test_classes_with_paths" do
     it "should return list of file name that ends with Spec or Test" do
