@@ -5,7 +5,7 @@ module Guard
   class XctoolTest < ::Guard::Guard
     include XctoolHelper
 
-    attr_reader :xctool, :test_paths, :target
+    attr_reader :xctool, :test_paths, :test_target
 
     # Initializes a Guard plugin.
     # Don't do any work here, especially as Guard plugins get initialized even if they are not in an active group!
@@ -19,7 +19,7 @@ module Guard
       super
 
       @test_paths = options[:test_paths] || "."
-      @target = options[:target]
+      @target = options[:test_target]
       @xctool = options[:xctool_command] || "xctool"
     end
 
