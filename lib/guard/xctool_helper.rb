@@ -49,7 +49,7 @@ module Guard
         project = Xcodeproj::Project.new(project_name)
 
         # find first targets with name ends with Spec or Target
-        project.targets.collect(&:name).find {|f| f =~ /(Spec|Test)s?$/}
+        return project.targets.collect(&:name).find {|f| f =~ /(Spec|Test)s?$/}
       end
       nil
     end

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Guard::XctoolTest" do
   let(:options) {
     {
-      :target => 'MyTests'
+      :test_target => 'MyTests'
     }
   }
   subject {
@@ -13,7 +13,7 @@ describe "Guard::XctoolTest" do
 
   describe "new" do
     it "should set default option" do
-      subject.target.should == "MyTests"
+      subject.test_target.should == "MyTests"
     end
   end
 

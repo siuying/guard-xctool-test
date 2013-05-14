@@ -54,4 +54,18 @@ describe "Guard::XctoolHelper" do
       test_file.should be_nil
     end
   end
+
+  describe "::find_test_target" do
+    it "should use xcodeproj to find test target" do
+      Dir.stub(:'[]').and_return(["MyProject.xcodeproj"])
+      stub_target = stub(:target)
+      stub_target.stub(:name).and_return("MyProjectSpec")
+      stub_project = stub(:project)
+      stub_project.stub(:targets).and_return([stub_target])
+      Xcodeproj::Project.stub(:new).and_return(stub_project)
+
+      target = subject.find_test_target
+      target.should == "MyProjectSpec"
+    end
+  end
 end

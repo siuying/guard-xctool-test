@@ -49,7 +49,7 @@ module Guard
     #
     def run_all
       UI.info "Running all tests..."
-      xctool_command("test -only #{test_target}")
+      xctool_command("test")
     end
 
     def run_on_changes(paths)
