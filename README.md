@@ -21,14 +21,20 @@ Or install it yourself as:
 - Ruby 1.9.3 or above
 - [xctool](https://github.com/facebook/xctool)
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Guardfile
 
 ```ruby
 guard 'xctool-test', :test_target => 'YouAppTests', :test_paths => 'YouAppTests' do
+  watch(%r{YouApp/(.+)\.(m|mm)$})
+  watch(%r{YouAppTests/(.+)\.(m|mm)$})
+end
+```
+
+## Options
+
+```ruby
+guard 'xctool-test', :test_target => 'YouAppTests' do
   watch(%r{YouApp/(.+)\.(m|mm)$})
   watch(%r{YouAppTests/(.+)\.(m|mm)$})
 end

@@ -40,6 +40,15 @@ module Guard
       return nil
     end
 
+    # Find first project and first Test target from current folder
+    def find_test_target
+      project_name = Dir["*.xcproject"].first
+      if project_name
+        project = Xcodeproj::Project.new(project_name)
+        pj.targets.collect(&:name).find {|f| f =~ /(Spec|Test)s?$/}
+      end
+    end
+
     protected
     # Given a path of m or mm file, and return the class name
     def classname_with_file(path)

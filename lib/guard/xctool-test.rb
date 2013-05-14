@@ -18,9 +18,9 @@ module Guard
     def initialize(watchers = [], options = {})
       super
 
-      @test_paths = options[:test_paths] || "."
-      @target = options[:test_target]
-      @xctool = options[:xctool_command] || "xctool"
+      @test_paths = options[:test_paths]  || "."
+      @target = options[:test_target]     || find_test_target
+      @xctool = options[:xctool_command]  || "xctool"
     end
 
     # Called once when Guard starts. Please override initialize method to init stuff.
@@ -31,12 +31,12 @@ module Guard
     def start
       # required user having xctool to start
       unless system("which #{xctool}")
-        UI.info "xcotool not found"
+        UI.info "xctool not found, please specify :xctool_command option"
         throw :task_has_failed
       end
 
       unless target
-        UI.info "Test :target missing"
+        UI.info "Cannot find test target, please specify :test_target option"
         throw :task_has_failed
       end
     end
