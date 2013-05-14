@@ -1,4 +1,3 @@
-require_relative "./test/version"
 require_relative './test_helper'
 
 require 'guard'
@@ -7,8 +6,6 @@ require 'guard/guard'
 module Guard
   module Xctool
     class Test < ::Guard::Guard
-      VERSION = "0.0.1"
-
       extend TestHelper
 
       attr_reader :xctool, :test_paths, :target
