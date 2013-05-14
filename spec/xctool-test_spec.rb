@@ -14,6 +14,7 @@ describe "Guard::XctoolTest" do
   describe "new" do
     it "should set default option" do
       subject.test_target.should == "MyTests"
+      subject.cli.should == ""
     end
   end
 
