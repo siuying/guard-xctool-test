@@ -7,6 +7,7 @@ module Guard
     # - if the path is end with Test.m/Test.mm/Spec.m/Spec.mm, then it is a test class, return the class name of it
     #
     # @param [Array<String>] paths
+    # @param [Array<String>] test_path
     #
     def test_classes_with_paths(paths, test_path=[])
       test_classes = paths.select{|path| path =~ TEST_FILE_REGEXP }   # get only Test/Spec
@@ -26,6 +27,8 @@ module Guard
     # return nil if the test do not exists.
     #
     def test_file(file, test_paths=[])
+      puts "find test file #{file} from #{test_paths}"
+
       test_paths = [] unless test_paths
       test_paths = [test_paths] unless test_paths.is_a?(Array)
       class_name = classname_with_file(file)
@@ -34,9 +37,12 @@ module Guard
       test_paths.each do |path|
         files = Dir.glob("#{path}/**/#{class_name}(Spec|Test).(m|mm)")
         first_file = files.first
+        puts " -> found #{first_file}"
+
         return first_file if first_file
       end
 
+      puts " -> not found"
       return nil
     end
 
