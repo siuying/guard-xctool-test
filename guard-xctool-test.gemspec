@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Guard::XctoolTestVersion::VERSION
   spec.authors       = ["Francis Chong"]
   spec.email         = ["francis@ignition.hk"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Xctool test guard allows you to automically & intelligently aunch specs when files are modified. This gem use xctool to build and run tests, and xcodeproj gem to parse project file.}
+  spec.summary       = %q{Xctool test guard allows you to automically & intelligently aunch specs when files are modified.}
+  spec.homepage      = "https://github.com/siuying/guard-xctool-test"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
