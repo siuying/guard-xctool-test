@@ -45,8 +45,11 @@ module Guard
       project_name = Dir["*.xcproject"].first
       if project_name
         project = Xcodeproj::Project.new(project_name)
-        pj.targets.collect(&:name).find {|f| f =~ /(Spec|Test)s?$/}
+
+        # find first targets with name ends with Spec or Target
+        project.targets.collect(&:name).find {|f| f =~ /(Spec|Test)s?$/}
       end
+      nil
     end
 
     protected
