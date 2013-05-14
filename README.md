@@ -1,6 +1,6 @@
-# Guard::Xctool::Test
+# guard-xctool-test
 
-TODO: Write a gem description
+Xctool test guard allows you to automically & intelligently aunch specs when files are modified.
 
 ## Installation
 
@@ -16,9 +16,23 @@ Or install it yourself as:
 
     $ gem install guard-xctool-test
 
+## Dependency
+
+- Ruby 1.9.3 or above
+- [xctool](https://github.com/facebook/xctool)
+
 ## Usage
 
 TODO: Write usage instructions here
+
+## Guardfile
+
+```ruby
+guard 'xctool-test', :test_target => 'YouAppTests', :test_paths => 'YouAppTests' do
+  watch(%r{YouApp/(.+)\.(m|mm)$})
+  watch(%r{YouAppTests/(.+)\.(m|mm)$})
+end
+```
 
 ## Contributing
 
