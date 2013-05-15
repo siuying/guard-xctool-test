@@ -5,7 +5,7 @@ module Guard
   class XctoolTest < ::Guard::Guard
     include XctoolHelper
 
-    attr_reader :xctool, :test_paths, :test_target, :cli
+    attr_reader :xctool, :test_paths, :test_target, :cli, :all_on_start
 
     # Initializes a Guard plugin.
     # Don't do any work here, especially as Guard plugins get initialized even if they are not in an active group!
@@ -22,6 +22,7 @@ module Guard
       @test_paths = options[:test_paths]    || "."
       @test_target = options[:test_target]  || find_test_target
       @xctool = options[:xctool_command]    || "xctool"
+      @all_on_start = options[:all_on_start] || false
     end
 
     # Called once when Guard starts. Please override initialize method to init stuff.
@@ -32,14 +33,16 @@ module Guard
     def start
       # required user having xctool to start
       unless system("which #{xctool}")
-        UI.info "xctool not found, please specify :xctool_command option"
+        UI.error "xctool not found, please specify :xctool_command option"
         throw :task_has_failed
       end
 
       unless test_target
-        UI.info "Cannot find test target, please specify :test_target option"
+        UI.error "Cannot find test target, please specify :test_target option"
         throw :task_has_failed
       end
+
+      run_all if all_on_start
     end
 
     # Called when just `enter` is pressed
