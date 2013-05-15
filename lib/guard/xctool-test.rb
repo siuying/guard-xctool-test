@@ -71,7 +71,9 @@ module Guard
       commands << xctool
       commands << cli if cli && cli.strip != ""
       commands << command
-      system(commands.join(" "))
+      unless passe = system(commands.join(" "))
+        throw :task_has_failed
+      end
     end
   end
 end
