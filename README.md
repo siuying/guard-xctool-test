@@ -30,6 +30,10 @@ guard 'xctool-test' do
 end
 ```
 
+## How to Use
+
+Make sure you installed xctool, and add appropriate ``.xctool-args`` to your project root before using ``guard-xctool-test``. Alternatively you may specify appropriate ``:cli`` option.
+
 ## Options
 
 By default, xctool-test find the folder for projects and find a target that look like test.
