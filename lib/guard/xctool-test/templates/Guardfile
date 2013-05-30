@@ -1,0 +1,3 @@
+guard 'xctool-test' do
+  watch(%r{(.+)\.(m|mm)$})
+end
